@@ -298,8 +298,8 @@ export abstract class QueryClient {
     if (!this.validTableNames.has(table)) return;
 
     return (
-      // @ts-ignore wait for sorem to fix this type for this
       (
+        // @ts-ignore wait for sorem to fix this type for this
         await this.queryObject<T>({
           text: `SELECT * FROM ${table} WHERE id = $1 LIMIT = 1`,
           args: [key],
@@ -315,8 +315,8 @@ export abstract class QueryClient {
     const query = this.objectToQueryString(data);
 
     return (
-      // @ts-ignore wait for sorem to fix this type for this
       (
+        // @ts-ignore wait for sorem to fix this type for this
         await this.queryObject<T>({
           text: `SELECT * FROM ${table} WHERE ${query.where} LIMIT = 1`,
           args: query.args,
@@ -332,8 +332,8 @@ export abstract class QueryClient {
     const query = this.objectToQueryString(data);
 
     return (
-      // @ts-ignore wait for sorem to fix this type for this
       (
+        // @ts-ignore wait for sorem to fix this type for this
         await this.queryObject<T>({
           text: `SELECT * FROM ${table} WHERE ${query.where}`,
           args: query.args,
@@ -375,8 +375,6 @@ export abstract class QueryClient {
       args: query.args,
     });
   }
-
-  
 
   objectToQueryString(data: Record<string, unknown>): {
     where: string;
