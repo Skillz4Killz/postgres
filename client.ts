@@ -19,6 +19,7 @@ import { Transaction, TransactionOptions } from "./query/transaction.ts";
 import { isTemplateString } from "./utils.ts";
 
 export abstract class QueryClient {
+  validTableNames = new Set<string>();
   protected connection: Connection;
   protected transaction: string | null = null;
 
@@ -289,6 +290,14 @@ export abstract class QueryClient {
     }
 
     return this.executeQuery<T>(query);
+  }
+
+  /** Returns an array of the provided type. */
+  async findAll<T>(table: string): Promise<T[]> {
+    if (!this.validTableNames.has(table)) return [] as T[];
+  
+    // @ts-ignore wait for sorem to fix this type for this
+    return (await client.queryObject<T>(`SELECT * FROM ${table}`)).rows
   }
 }
 
