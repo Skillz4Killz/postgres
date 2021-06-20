@@ -299,6 +299,18 @@ export abstract class QueryClient {
     // @ts-ignore wait for sorem to fix this type for this
     return (await client.queryObject<T>(`SELECT * FROM ${table}`)).rows
   }
+
+
+  /** Returns 1 single row from a table using the id column. */
+  async findOneByID<T>(table: string, key: string): Promise<T | undefined> {
+    if (!this.validTableNames.has(table)) return;
+
+    // @ts-ignore wait for sorem to fix this type for this
+    return (await client.queryObject<T>({
+      text: `SELECT * FROM ${table} WHERE id = $1 LIMIT = 1`,
+      args: [key]
+    })).rows
+  }
 }
 
 // TODO
