@@ -338,7 +338,7 @@ export abstract class QueryClient {
           text: `SELECT * FROM ${table} WHERE ${query.where}`,
           args: query.args,
         })
-      ).rows[0]
+      ).rows
     );
   }
 
