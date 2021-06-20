@@ -297,7 +297,7 @@ export abstract class QueryClient {
     if (!this.validTableNames.has(table)) return [] as T[];
   
     // @ts-ignore wait for sorem to fix this type for this
-    return (await client.queryObject<T>(`SELECT * FROM ${table}`)).rows
+    return (await client.queryObject<T>(`SELECT * FROM ${table}`)).rows;
   }
 
 
@@ -309,7 +309,7 @@ export abstract class QueryClient {
     return (await client.queryObject<T>({
       text: `SELECT * FROM ${table} WHERE id = $1 LIMIT = 1`,
       args: [key]
-    })).rows
+    })).rows[0];
   }
 }
 
